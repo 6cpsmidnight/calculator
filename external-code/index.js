@@ -20,5 +20,5 @@
 // // Buttons - Delete
 // $()
 
-// // Title - Loading
-// document.title = "Calculator";
+// Title - Loading
+document.title = "Calculator";
