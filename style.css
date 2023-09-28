@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    font-family: monospace;
+}
+
+/* Calculator */
+#calculator {
+    border: solid 1.5px #fff;
+    border-radius: 10px;
+    background-color: #6c757d;
+    width: 300px;
+    height: 400px;
+    margin: auto;
+    padding: 35px 30px 40px 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#calculation-area {
+    background-color: #fff;
+    height: 100px;
+    opacity: 95%;
+    border-radius: 5px;
+    font-size: 40px;
+    margin-left: 5px;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: right;
+}
+
+.btn-rows button {
+    background-color: #000;
+    color: #fff;
+    width: 45px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 18px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.btn-row-output {
+    text-align: right;
+}
+
+.btn-rows .btn-optr {
+    background-color: #f0c107;
+}
+
+.btn-rows .btn-del {
+    background-color: #dc3545;
+}
+
+.btn-rows .btn-output {
+    background-color: #198754;
+    width: 110px;
+}
+
+.btn-rows button:active{
+    animation-name: boxShadow1;
+    animation-duration: .1s;
+    animation-iteration-count: 1;
+}
+
+@keyframes boxShadow1 {
+    100% {
+        transform: scale(1.1);
+        box-shadow: 0 0 5px 5px #f0f0f0;
+    }
+}

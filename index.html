@@ -1,121 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <!-- Title - Loading -->
-    <script>
-        document.title = "Loading...";
-    </script>
-
-    <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Title -->
     <title>Calculator</title>
-
-    <!-- Favicon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/global/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/global/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/global/images/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/global/images/favicon/site.webmanifest">
-
-    <!-- Description -->
-    <meta name="description" content="A calculator.">
-
-    <!-- Bootstrap CSS / Bootswatch -->
-    <link rel="stylesheet" href="/global/code/bootstrap.min.css">
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="external-code/index.min.css">
-
+    <meta name="description" content="An ecalculator.">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
     <div id="calculator">
-
-        <div class="numbers-area">
-
-            <div class="calculation-area"></div>
-
-            <div class="result-area"></div>
-
+        <div id="calculation-area"></div>
+        <div class="btn-rows">
+            <!--
+                0-9: 0-9,
+                10: decimal,
+                11-14: operators,
+                15: del(X),
+                16: output(=)
+            -->
+            <div class="btn-row">
+                <button onclick="input(7)">7</button>
+                <button onclick="input(8)">8</button>
+                <button onclick="input(9)">9</button>
+                <button onclick="input(14)" class="btn-optr">/</button>
+            </div>
+            <div class="btn-row">
+                <button onclick="input(4)">4</button>
+                <button onclick="input(5)">5</button>
+                <button onclick="input(6)">6</button>
+                <button onclick="input(13)" class="btn-optr">*</button>
+            </div>
+            <div class="btn-row">
+                <button onclick="input(1)">1</button>
+                <button onclick="input(2)">2</button>
+                <button onclick="input(3)">3</button>
+                <button onclick="input(12)" class="btn-optr">-</button>
+            </div>
+            <div class="btn-row">
+                <button onclick="input(0)">0</button>
+                <button onclick="input(10)">.</button>
+                <button onclick="input(15)" class="btn-del">×</button>
+                <button onclick="input(11)" class="btn-optr">+</button>
+            </div>
+            <div class="btn-row btn-row-output">
+                <button onclick="input(16)" class="btn-output">=</button>
+            </div>
         </div>
-
-        <div class="button-rows">
-
-            <div class="first-row">
-
-                <button class="button btn-lg btn-outline-info equal">=</button>
-
-            </div>
-
-            <div class="button-row second-row">
-
-                <button class="button btn-lg btn-outline-primary seven">7</button>
-
-                <button class="button btn-lg btn-outline-primary eight">8</button>
-
-                <button class="button btn-lg btn-outline-primary nine">9</button>
-
-                <button class="button btn-lg btn-outline-info divide">/</button>
-
-            </div>
-
-            <div class="button-row third-row">
-
-                <button class="button btn-lg btn-outline-primary four">4</button>
-
-                <button class="button btn-lg btn-outline-primary five">5</button>
-
-                <button class="button btn-lg btn-outline-primary six">6</button>
-
-                <button class="button btn-lg btn-outline-info multiply">*</button>
-
-            </div>
-
-            <div class="button-row fourth-row">
-
-                <button class="button btn-lg btn-outline-primary one">1</button>
-
-                <button class="button btn-lg btn-outline-primary two">2</button>
-
-                <button class="button btn-lg btn-outline-primary three">3</button>
-
-                <button class="button btn-lg btn-outline-info minus">-</button>
-
-            </div>
-
-            <div class="button-row fifth-row">
-
-                <button class="button btn-lg btn-outline-primary dot">.</button>
-
-                <button class="button btn-lg btn-outline-primary zero">0</button>
-
-                <button class="button btn-lg btn-outline-danger delete">X</button>
-
-                <button class="button btn-lg btn-outline-info plus">+</button>
-
-            </div>
-
-        </div>
-
-    </div>>
-
+    </div>
+    <script src="script.js"></script>
 </body>
-
-<!-- jQuery 3.5.1 Slim Build -->
-<script src="/global/code/jquery.min.js"></script>
-
-<!-- Bootstrap 4.5 JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
-</script>
-
-<!-- JavaScript -->
-<script src="external-code/index.min.js"></script>
-
 </html>
