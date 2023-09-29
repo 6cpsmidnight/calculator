@@ -8,7 +8,10 @@
 </head>
 <body>
     <div id="calculator">
-        <div id="calculation-area"></div>
+        <div id="calculation-area">
+            <p id="top-calc-area">‎ </p>
+            <p id="bottom-calc-area"></p>
+        </div>
         <div class="btn-rows">
             <!--
                 0-9: 0-9,
@@ -21,28 +24,29 @@
                 <button onclick="input(7)">7</button>
                 <button onclick="input(8)">8</button>
                 <button onclick="input(9)">9</button>
-                <button onclick="input(14)" class="btn-optr">/</button>
+                <button onclick="input(14)" id="divide" class="btn-optr">/</button>
             </div>
             <div class="btn-row">
                 <button onclick="input(4)">4</button>
                 <button onclick="input(5)">5</button>
                 <button onclick="input(6)">6</button>
-                <button onclick="input(13)" class="btn-optr">*</button>
+                <button onclick="input(13)" id="multiply" class="btn-optr">*</button>
             </div>
             <div class="btn-row">
                 <button onclick="input(1)">1</button>
                 <button onclick="input(2)">2</button>
                 <button onclick="input(3)">3</button>
-                <button onclick="input(12)" class="btn-optr">-</button>
+                <button onclick="input(12)" id="minus" class="btn-optr">-</button>
             </div>
             <div class="btn-row">
                 <button onclick="input(0)">0</button>
                 <button onclick="input(10)">.</button>
                 <button onclick="input(15)" class="btn-del">×</button>
-                <button onclick="input(11)" class="btn-optr">+</button>
+                <button onclick="input(11)" id="plus" class="btn-optr">+</button>
             </div>
-            <div class="btn-row btn-row-output">
-                <button onclick="input(16)" class="btn-output">=</button>
+            <div class="btn-row btn-bottom-output">
+                <button onclick="input(16)" class="btn-big btn-clr">Clr</button>
+                <button onclick="input(17)" class="btn-big btn-output">=</button>
             </div>
         </div>
     </div>

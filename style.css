@@ -30,11 +30,28 @@ body {
     height: 100px;
     opacity: 95%;
     border-radius: 5px;
-    font-size: 40px;
     margin-left: 5px;
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 12.5px;
     text-align: right;
+}
+
+#top-calc-area {
+    color: #6c757d;
+    font-size: 25px;
+    overflow: scroll;
+}
+
+#bottom-calc-area {
+    color: #000;
+    font-size: 40px;
+    overflow: scroll;
+}
+
+.scale-animation {
+    animation-name: scale1;
+    animation-duration: .1s;
+    animation-iteration-count: 1;
 }
 
 .btn-rows button {
@@ -50,10 +67,6 @@ body {
     margin-bottom: 10px;
 }
 
-.btn-row-output {
-    text-align: right;
-}
-
 .btn-rows .btn-optr {
     background-color: #f0c107;
 }
@@ -62,18 +75,31 @@ body {
     background-color: #dc3545;
 }
 
-.btn-rows .btn-output {
-    background-color: #198754;
-    width: 110px;
+.btn-rows .btn-big {
+    width: 102.5px;
 }
 
-.btn-rows button:active{
-    animation-name: boxShadow1;
+.btn-rows .btn-output {
+    background-color: #198754;
+}
+
+.btn-rows button:hover {
+    cursor: pointer;
+}
+
+.btn-rows button:active {
+    animation-name: btn-click;
     animation-duration: .1s;
     animation-iteration-count: 1;
 }
 
-@keyframes boxShadow1 {
+@keyframes scale1 {
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes btn-click {
     100% {
         transform: scale(1.1);
         box-shadow: 0 0 5px 5px #f0f0f0;
