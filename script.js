@@ -12,127 +12,205 @@ const plus = document.getElementById("plus");
 const minus = document.getElementById("minus");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
+const del = document.getElementById("del");
+const clr = document.getElementById("clr");
+const output = document.getElementById("output");
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function rst() {
+function clrData() {
+    firstIn = "";
+    secondIn = "";
+    optrChg(0);
+    equal = "";
+}
+
+function optrChg (optr) {
+    switch (optr){
+        case 0:
+            operatorId = 0;
+            operator = "";
+            break;
+        case 1:
+            operatorId = 1;
+            operator = "+";
+            btnClickAnim(plus);
+            break;
+        case 2:
+            operatorId = 2;
+            operator = "-";
+            btnClickAnim(minus);
+            break;
+        case 3:
+            operatorId = 3;
+            operator = "*";
+            btnClickAnim(multiply);
+            break;
+        case 4:
+            operatorId = 4;
+            operator = "/";
+            btnClickAnim(divide);
+            break;
+    }
+}
+
+function origTxtClear () {
+    if (tCalcArea.innerHTML === "Made by") {
+        clrCalcDisp();
+    }
+}
+
+function clrCalcDisp() {
     tCalcArea.innerHTML = "‎ ";
     bCalcArea.innerHTML = "‎ ";
-    toggleOperators(1);
+}
+
+function toggleBtn (b, o) {
+    switch (o) {
+        case 0:
+            b.style.opacity = "0.5";
+            b.style.cursor = "not-allowed";
+            break;
+        case 1:
+            b.style.opacity = "1";
+            b.style.cursor = "pointer";
+    }
+}
+
+function btnClickAnim (b) {
+    b.classList.add("btn-click-anim");
+    sleep(100).then(() => { b.classList.remove("btn-click-anim"); });
 }
 
 function toggleOperators (o) {
     switch (o) {
         case 0:
-            plus.style.opacity = "0.5";
-            minus.style.opacity = "0.5";
-            multiply.style.opacity = "0.5";
-            divide.style.opacity = "0.5";
-            plus.style.cursor = "not-allowed";
-            minus.style.cursor = "not-allowed";
-            multiply.style.cursor = "not-allowed";
-            divide.style.cursor = "not-allowed";
+            toggleBtn(plus, 0);
+            toggleBtn(minus, 0);
+            toggleBtn(multiply, 0);
+            toggleBtn(divide, 0);
             break;
         case 1:
-            plus.style.opacity = "1";
-            minus.style.opacity = "1";
-            multiply.style.opacity = "1";
-            divide.style.opacity = "1";
-            plus.style.cursor = "pointer";
-            minus.style.cursor = "pointer";
-            multiply.style.cursor = "pointer";
-            divide.style.cursor = "pointer";
+            toggleBtn(plus, 1);
+            toggleBtn(minus, 1);
+            toggleBtn(multiply, 1);
+            toggleBtn(divide, 1);
             break;
     }
 }
 
 toggleOperators(0);
-
-function clrData() {
-    firstIn = "";
-    secondIn = "";
-    operatorId = 0;
-    operator = "";
-    equal = "";
-}
+toggleBtn(del, 0);
+toggleBtn(output, 0);
 
 function input(e) {
     if (e > 0 && e <= 9 && firstIn.length === 0 || e <= 9 && firstIn.length > 0) {
         if (operatorId === 0) {
+            origTxtClear();
+            
             if (firstIn.length === 0 && secondIn.length === 0 && operatorId === 0 && operator.length === 0 && equal.length === 0) {
                 tCalcArea.innerHTML = "‎ ";
             }
             firstIn += e.toString();
             bCalcArea.innerHTML = firstIn;
+
             toggleOperators(1);
+            toggleBtn(clr, 1);
         } else {
             if (secondIn.length === 0) {
-                tCalcArea.innerHTML += operator;
+                tCalcArea.innerHTML = firstIn + operator;
+                
                 toggleOperators(0);
+                toggleBtn(output, 1);
             }
             secondIn += e.toString();
             bCalcArea.innerHTML = secondIn;
         }
+        toggleBtn(del, 1);
         equal = "=";
     } else if (e === 10) {
         if (operatorId === 0) {
+            origTxtClear();
+
             firstIn += ".";
             bCalcArea.innerHTML = firstIn;
+
+            toggleOperators(1);
+            toggleBtn(del, 1);
+            toggleBtn(clr, 1);
         } else {
             if (secondIn.length === 0) {
                 tCalcArea.innerHTML += operator;
+                
                 toggleOperators(0);
+                toggleBtn(output, 1);
             }
             secondIn += ".";
             bCalcArea.innerHTML = secondIn;
         }
     } else if (firstIn.length > 0 && secondIn.length === 0 && e >= 11 && e <= 14) {
         tCalcArea.innerHTML = firstIn;
-        switch (e){
+        switch (e) {
             case 11:
-                operatorId = 1;
-                operator = "+";
-                bCalcArea.innerHTML = "+";
+                optrChg(1);
+                bCalcArea.innerHTML = operator;
                 break;
             case 12:
-                operatorId = 2;
-                operator = "-";
-                bCalcArea.innerHTML = "-";
+                optrChg(2);
+                bCalcArea.innerHTML = operator;
                 break;
             case 13:
-                operatorId = 3;
-                operator = "*";
-                bCalcArea.innerHTML = "*";
+                optrChg(3);
+                bCalcArea.innerHTML = operator;
                 break;
             case 14:
-                operatorId = 4;
-                operator = "/";
-                bCalcArea.innerHTML = "/";
+                optrChg(4);
+                bCalcArea.innerHTML = operator;
                 break;
         }
+        bCalcArea.innerHTML = operator;
     } else if (e === 15) {
-        if (firstIn.length === 0 && secondIn.length === 0 && operatorId === 0 && operator.length === 0 && equal.length === 0) {
-            tCalcArea.innerHTML = firstIn;
-            bCalcArea.innerHTML = firstIn;
-        } else if (operatorId === 0) {
-            firstIn = firstIn.slice(0, -1);
-            bCalcArea.innerHTML = firstIn;
-        } else if (secondIn.length !== 0) {
-            secondIn = secondIn.slice(0, -1);
-            bCalcArea.innerHTML = secondIn;
+        if (tCalcArea.innerHTML !== "Made by" && bCalcArea.length !== 0 && firstIn.length !== 0) {
+            btnClickAnim(del);
+            if (operatorId === 0) {
+                firstIn = firstIn.slice(0, -1);
+                bCalcArea.innerHTML = firstIn;
+                if (firstIn.length === 0) {
+                    toggleOperators(0);
+                    toggleBtn(del, 0);
+                    toggleBtn(clr, 0);
+                    toggleBtn(output, 0)
+                }
+            } else if (operatorId !== 0 && secondIn.length === 0) {
+                optrChg(0);
+                tCalcArea.innerHTML = "‎ ";
+                bCalcArea.innerHTML = firstIn;
+            } else if (secondIn.length !== 0) {
+                secondIn = secondIn.slice(0, -1);
+                bCalcArea.innerHTML = secondIn;
+                if (secondIn.length === 0) {
+                    tCalcArea.innerHTML = firstIn;
+                    bCalcArea.innerHTML = operator;
+                    
+                    toggleOperators(1);
+                    toggleBtn(output, 0)
+                }
+            }
         }
     } else if (e === 16) {
-        tCalcArea.innerHTML = "‎ ";
-        bCalcArea.innerHTML = "‎ ";
-        toggleOperators(0);
-        clrData();
+        if (bCalcArea.innerHTML.length !== 0) {
+            clrCalcDisp();
+            toggleOperators(0);
+            toggleBtn(del, 0);
+            toggleBtn(clr, 0);
+            clrData();
+
+            btnClickAnim(clr);
+        }
     } else if (e === 17) {
-        if (firstIn.length === 0 && secondIn.length === 0 && operatorId === 0 && operator.length === 0) {
-            tCalcArea.innerHTML = "‎ ";
-            bCalcArea.innerHTML = "‎ ";
-        } else if (secondIn.length !== 0) {
+        if (secondIn.length !== 0) {
             tCalcArea.innerHTML = firstIn + operator + secondIn + equal;
             switch (operatorId) {
                 case 1:
@@ -156,10 +234,12 @@ function input(e) {
                 bCalcArea.innerHTML = answer;
             }
 
-            bCalcArea.classList.add("scale-animation")
+            bCalcArea.classList.add("scale-animation");
             sleep(100).then(() => { bCalcArea.classList.remove("scale-animation"); });
 
-            clrData()
+            toggleBtn(del, 0);
+            toggleBtn(output, 0);
+            clrData();
         }
     }
 }

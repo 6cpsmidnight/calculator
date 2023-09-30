@@ -9,6 +9,37 @@ body {
     font-family: monospace;
 }
 
+a {
+	color: #000;
+    text-decoration: none;
+    position: relative;
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(
+        to right,
+        #000 40%,
+        rgb(255, 255, 255, 0) 40% 60%,
+        #000 60%
+    );
+    bottom: 5px;
+    left: 0;
+    transform-origin: left;
+    transform: scaleX(1);
+    transition: transform .3s ease-in-out;
+}
+
+a:hover::before {
+    /* background-color: #000; */
+    transform-origin: right;
+    transform: scaleX(0);
+}
+
 /* Calculator */
 #calculator {
     border: solid 1.5px #fff;
@@ -67,6 +98,14 @@ body {
     margin-bottom: 10px;
 }
 
+.btn-num:active,
+.btn-decimal:active,
+.btn-click-anim {
+    animation-name: btn-click;
+    animation-duration: .1s;
+    animation-iteration-count: 1;
+}
+
 .btn-rows .btn-optr {
     background-color: #f0c107;
 }
@@ -85,12 +124,6 @@ body {
 
 .btn-rows button:hover {
     cursor: pointer;
-}
-
-.btn-rows button:active {
-    animation-name: btn-click;
-    animation-duration: .1s;
-    animation-iteration-count: 1;
 }
 
 @keyframes scale1 {
