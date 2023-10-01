@@ -4,8 +4,8 @@ let operatorId = 0;
 let operator = "";
 let answer = 0;
 
-const tCalcDisp = document.getElementById("top-calc-disp");
-const bCalcDisp = document.getElementById("bottom-calc-disp");
+const tCalcDisp = document.getElementById("topCalcDisp");
+const bCalcDisp = document.getElementById("bottomCalcDisp");
 
 const plus = document.getElementById("plus");
 const minus = document.getElementById("minus");
@@ -14,6 +14,8 @@ const divide = document.getElementById("divide");
 const del = document.getElementById("del");
 const clr = document.getElementById("clr");
 const output = document.getElementById("output");
+
+const mathConstantsDropdown = document.getElementById("mathConstantsDropdown");
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -75,9 +77,9 @@ function rmvUnccsryZrosOnHead(i) {
     return i;
 }
 
-function rmvUnccsryZrosOnTail(i) {
-    if (i.includes(".") && i.slice(-1) !== ".") {
-        while (i.slice(-1) === "0") {
+function rmvUnccsryZrosAndDecsOnTail(i) {
+    if (i.includes(".")) {
+        while (i.slice(-1) === "0" || i.slice(-1) === ".") {
             i = i.slice(0, -1);
         }
     }
@@ -162,8 +164,7 @@ function input(e) {
                 toggleBtn(output, 1);
             }
 
-            secondIn = rmvUnccsryZrosOnHead(secondIn);
-            secondIn = e.toString();
+            secondIn += e.toString();
             bCalcDisp.innerHTML = secondIn;
         }
 
@@ -191,7 +192,7 @@ function input(e) {
             bCalcDisp.innerHTML = secondIn;
         }
     } else if (firstIn.length > 0 && secondIn.length === 0 && e >= 11 && e <= 14) {
-        firstIn = rmvUnccsryZrosOnTail(firstIn);
+        firstIn = rmvUnccsryZrosAndDecsOnTail(firstIn);
         tCalcDisp.innerHTML = firstIn;
 
         optrChg(e);
@@ -229,6 +230,14 @@ function input(e) {
             }
         }
     } else if (e === 16) {
+
+        if (mathConstantsDropdown) {
+            mathConstantsDropdown.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
+    } else if (e === 17) {
         if (bCalcDisp.innerHTML.length !== 0) {
             clrCalcDisp();
 
@@ -240,9 +249,9 @@ function input(e) {
 
             btnClickAnim(clr);
         }
-    } else if (e === 17) {
+    } else if (e === 18) {
         if (secondIn.length !== 0) {
-            secondIn = rmvUnccsryZrosOnTail(secondIn);
+            secondIn = rmvUnccsryZrosAndDecsOnTail(secondIn);
 
             tCalcDisp.innerHTML = firstIn + operator + secondIn + "=";
 
