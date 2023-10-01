@@ -25,35 +25,6 @@ function clrData() {
     optrChg(0);
 }
 
-function optrChg(optr) {
-    switch (optr){
-        case 0:
-            operatorId = 0;
-            operator = "";
-            break;
-        case 1:
-            operatorId = 1;
-            operator = "+";
-            btnClickAnim(plus);
-            break;
-        case 2:
-            operatorId = 2;
-            operator = "-";
-            btnClickAnim(minus);
-            break;
-        case 3:
-            operatorId = 3;
-            operator = "*";
-            btnClickAnim(multiply);
-            break;
-        case 4:
-            operatorId = 4;
-            operator = "/";
-            btnClickAnim(divide);
-            break;
-    }
-}
-
 function origTxtClear() {
     if (tCalcArea.innerHTML === "Made by") {
         clrCalcDisp();
@@ -109,7 +80,9 @@ function toggleBtn(btn, o) {
 
 function btnClickAnim(btn) {
     btn.classList.add("btn-click-anim");
-    sleep(100).then(() => { btn.classList.remove("btn-click-anim"); });
+    sleep(100).then(() => {
+        btn.classList.remove("btn-click-anim");
+    });
 }
 
 function toggleOperators(o) {
@@ -137,8 +110,7 @@ function input(e) {
     if (e <= 9) {
         if (operatorId === 0) {
             origTxtClear();
-            
-            clrOutcome() 
+            clrOutcome()
 
             firstIn = rmvUnccsryZrosOnHead(firstIn);
             firstIn += e.toString();
@@ -149,7 +121,7 @@ function input(e) {
         } else {
             if (secondIn.length === 0) {
                 tCalcArea.innerHTML = firstIn + operator;
-                
+
                 toggleOperators(0);
                 toggleBtn(output, 1);
             }
@@ -165,8 +137,7 @@ function input(e) {
     } else if (e === 10) {
         if (operatorId === 0) {
             origTxtClear();
-
-            clrOutcome() 
+            clrOutcome()
 
             firstIn += ".";
             bCalcArea.innerHTML = firstIn;
@@ -177,7 +148,7 @@ function input(e) {
         } else {
             if (secondIn.length === 0) {
                 tCalcArea.innerHTML += operator;
-                
+
                 toggleOperators(0);
                 toggleBtn(output, 1);
             }
@@ -187,27 +158,12 @@ function input(e) {
         }
     } else if (firstIn.length > 0 && secondIn.length === 0 && e >= 11 && e <= 14) {
         firstIn = rmvUnccsryZrosOnTail(firstIn);
-
         tCalcArea.innerHTML = firstIn;
 
-        switch (e) {
-            case 11:
-                optrChg(1);
-                bCalcArea.innerHTML = operator;
-                break;
-            case 12:
-                optrChg(2);
-                bCalcArea.innerHTML = operator;
-                break;
-            case 13:
-                optrChg(3);
-                bCalcArea.innerHTML = operator;
-                break;
-            case 14:
-                optrChg(4);
-                bCalcArea.innerHTML = operator;
-                break;
-        }
+        e.replace(/11/g, "+");
+        e.replace(/12/g, "-");
+        e.replace(/13/g, "*");
+        e.replace(/14/g, "/");
         bCalcArea.innerHTML = operator;
     } else if (e === 15) {
         if (tCalcArea.innerHTML !== "Made by" && bCalcArea.length !== 0 && firstIn.length !== 0) {
@@ -235,7 +191,7 @@ function input(e) {
                 if (secondIn.length === 0) {
                     tCalcArea.innerHTML = firstIn;
                     bCalcArea.innerHTML = operator;
-                    
+
                     toggleOperators(1);
                     toggleBtn(output, 0);
                 }
@@ -256,7 +212,7 @@ function input(e) {
     } else if (e === 17) {
         if (secondIn.length !== 0) {
             secondIn = rmvUnccsryZrosOnTail(secondIn);
-            
+
             tCalcArea.innerHTML = firstIn + operator + secondIn + "=";
 
             switch (operatorId) {
@@ -283,7 +239,9 @@ function input(e) {
             }
 
             bCalcArea.classList.add("scale-animation");
-            sleep(100).then(() => { bCalcArea.classList.remove("scale-animation"); });
+            sleep(100).then(() => {
+                bCalcArea.classList.remove("scale-animation");
+            });
 
             toggleBtn(del, 0);
             toggleBtn(output, 0);
