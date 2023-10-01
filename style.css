@@ -137,7 +137,7 @@ a:hover::before {
     transform: translate(-50%, 0%);
 }
 
-/* @media all and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0) { */
+@media all and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0) {
     #mathConstantsDropdown summary {
         /* background-color: #fff; */
         color: #000;
@@ -151,7 +151,7 @@ a:hover::before {
         -ms-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
         -o-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
     }
-/* } */
+}
 
 #mathConstantsDropdown li {
     font-size: 15px;
