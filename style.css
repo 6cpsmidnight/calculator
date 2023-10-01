@@ -137,19 +137,21 @@ a:hover::before {
     transform: translate(-50%, 0%);
 }
 
-#mathConstantsDropdown summary {
-    background-color: #fff;
-    color: #000;
-    text-align: center;
-    width: 200px;
-    border-radius: 8px;
-    margin-bottom: 50px;
-    box-shadow: 0 0 40px 10px #fff;
-}
-
-#mathConstantsDropdown summary:hover {
-    cursor: pointer;
-}
+/* @media all and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0) { */
+    #mathConstantsDropdown summary {
+        /* background-color: #fff; */
+        color: #000;
+        text-align: center;
+        width: 200px;
+        border-radius: 8px;
+        margin-bottom: 50px;
+        box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+        -moz-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+        -webkit-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+        -ms-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+        -o-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+    }
+/* } */
 
 #mathConstantsDropdown li {
     font-size: 15px;
