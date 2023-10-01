@@ -139,7 +139,7 @@ a:hover::before {
 
 @media all and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0) {
     #mathConstantsDropdown summary {
-        /* background-color: #fff; */
+        background-color: #fff;
         color: #000;
         text-align: center;
         width: 200px;
