@@ -10,23 +10,21 @@ body {
 }
 
 a {
-	color: #000;
+    color: #000;
     text-decoration: none;
     position: relative;
 }
 
 a::before {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 4px;
     border-radius: 4px;
-    background: linear-gradient(
-        to right,
-        #000 40%,
-        rgb(255, 255, 255, 0) 40% 60%,
-        #000 60%
-    );
+    background: linear-gradient(to right,
+            #000 40%,
+            rgb(255, 255, 255, 0) 40% 60%,
+            #000 60%);
     bottom: 5px;
     left: 0;
     transform-origin: left;
@@ -137,21 +135,22 @@ a:hover::before {
     transform: translate(-50%, 0%);
 }
 
-@media all and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0) {
-    #mathConstantsDropdown summary {
-        background-color: #fff;
-        background: #fff;
-        color: #000;
-        text-align: center;
-        width: 200px;
-        border-radius: 8px;
-        margin-bottom: 50px;
-        box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
-        -moz-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
-        -webkit-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
-        -ms-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
-        -o-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
-    }
+#mathConstantsDropdown summary {
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    width: 200px;
+    border-radius: 8px;
+    margin-bottom: 50px;
+    box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+    -moz-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+    -webkit-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+    -ms-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+    -o-box-shadow: 0 0 40px 10px #fff, 0 0 100px 0 #fff inset;
+}
+
+#mathConstantsDropdown summary:hover {
+    cursor: pointer;
 }
 
 #mathConstantsDropdown li {

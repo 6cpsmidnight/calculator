@@ -230,13 +230,11 @@ function input(e) {
             }
         }
     } else if (e === 16) {
-
-        if (mathConstantsDropdown) {
-            mathConstantsDropdown.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        }
+        mathConstantsDropdown.setAttribute("open", "true");
+        mathConstantsDropdown.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
     } else if (e === 17) {
         if (bCalcDisp.innerHTML.length !== 0) {
             clrCalcDisp();
