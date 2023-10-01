@@ -4,8 +4,8 @@ let operatorId = 0;
 let operator = "";
 let answer = 0;
 
-const tCalcArea = document.getElementById("top-calc-area");
-const bCalcArea = document.getElementById("bottom-calc-area");
+const tCalcDisp = document.getElementById("top-calc-disp");
+const bCalcDisp = document.getElementById("bottom-calc-disp");
 
 const plus = document.getElementById("plus");
 const minus = document.getElementById("minus");
@@ -25,22 +25,51 @@ function clrData() {
     optrChg(0);
 }
 
-function origTxtClear() {
-    if (tCalcArea.innerHTML === "Made by") {
+function optrChg(optr) {
+    switch (optr) {
+        case 0:
+            operatorId = 0;
+            operator = "";
+            break;
+        case 11:
+            operatorId = 1;
+            operator = "+";
+            btnClickAnim(plus);
+            break;
+        case 12:
+            operatorId = 2;
+            operator = "-";
+            btnClickAnim(minus);
+            break;
+        case 13:
+            operatorId = 3;
+            operator = "*";
+            btnClickAnim(multiply);
+            break;
+        case 14:
+            operatorId = 4;
+            operator = "/";
+            btnClickAnim(divide);
+            break;
+    }
+}
+
+function origTxtClr() {
+    if (tCalcDisp.innerHTML === "Made by") {
         clrCalcDisp();
     }
 }
 
 function defNumInDisp(i) {
-    if (bCalcArea.innerHTML === "0") {
+    if (bCalcDisp.innerHTML === "0") {
         i = "";
     }
     i += e.toString();
-    bCalcArea.innerHTML = i;
+    bCalcDisp.innerHTML = i;
 }
 
 function rmvUnccsryZrosOnHead(i) {
-    if (bCalcArea.innerHTML === "0") {
+    if (bCalcDisp.innerHTML === "0") {
         i = "";
     }
     return i;
@@ -56,13 +85,13 @@ function rmvUnccsryZrosOnTail(i) {
 }
 
 function clrCalcDisp() {
-    tCalcArea.innerHTML = "‎ ";
-    bCalcArea.innerHTML = "‎ ";
+    tCalcDisp.innerHTML = "‎ ";
+    bCalcDisp.innerHTML = "‎ ";
 }
 
 function clrOutcome() {
     if (firstIn.length === 0) {
-        tCalcArea.innerHTML = "‎ ";
+        tCalcDisp.innerHTML = "‎ ";
     }
 }
 
@@ -106,72 +135,74 @@ toggleOperators(0);
 toggleBtn(del, 0);
 toggleBtn(output, 0);
 
+// document.addEventListener("keydown", (e) => {
+//     if (e.code === "ArrowUp") playerSpriteX += 10
+//     else if (e.code === "ArrowDown") playerSpriteX -= 10
+
+//     document.getElementById('test').innerHTML = 'playerSpriteX = ' + playerSpriteX;
+// });
+
 function input(e) {
     if (e <= 9) {
         if (operatorId === 0) {
-            origTxtClear();
+            origTxtClr();
             clrOutcome()
 
             firstIn = rmvUnccsryZrosOnHead(firstIn);
             firstIn += e.toString();
-            bCalcArea.innerHTML = firstIn;
+            bCalcDisp.innerHTML = firstIn;
 
             toggleOperators(1);
             toggleBtn(clr, 1);
         } else {
             if (secondIn.length === 0) {
-                tCalcArea.innerHTML = firstIn + operator;
+                tCalcDisp.innerHTML = firstIn + operator;
 
                 toggleOperators(0);
                 toggleBtn(output, 1);
             }
 
             secondIn = rmvUnccsryZrosOnHead(secondIn);
-            secondIn += e.toString();
-            bCalcArea.innerHTML = secondIn;
+            secondIn = e.toString();
+            bCalcDisp.innerHTML = secondIn;
         }
-
-
 
         toggleBtn(del, 1);
     } else if (e === 10) {
         if (operatorId === 0) {
-            origTxtClear();
+            origTxtClr();
             clrOutcome()
 
             firstIn += ".";
-            bCalcArea.innerHTML = firstIn;
+            bCalcDisp.innerHTML = firstIn;
 
             toggleOperators(1);
             toggleBtn(del, 1);
             toggleBtn(clr, 1);
         } else {
             if (secondIn.length === 0) {
-                tCalcArea.innerHTML += operator;
+                tCalcDisp.innerHTML += operator;
 
                 toggleOperators(0);
                 toggleBtn(output, 1);
             }
 
             secondIn += ".";
-            bCalcArea.innerHTML = secondIn;
+            bCalcDisp.innerHTML = secondIn;
         }
     } else if (firstIn.length > 0 && secondIn.length === 0 && e >= 11 && e <= 14) {
         firstIn = rmvUnccsryZrosOnTail(firstIn);
-        tCalcArea.innerHTML = firstIn;
+        tCalcDisp.innerHTML = firstIn;
 
-        e.replace(/11/g, "+");
-        e.replace(/12/g, "-");
-        e.replace(/13/g, "*");
-        e.replace(/14/g, "/");
-        bCalcArea.innerHTML = operator;
+        optrChg(e);
+        bCalcDisp.innerHTML = operator;
     } else if (e === 15) {
-        if (tCalcArea.innerHTML !== "Made by" && bCalcArea.length !== 0 && firstIn.length !== 0) {
+        if (tCalcDisp.innerHTML !== "Made by" && bCalcDisp.length !== 0 && firstIn.length !== 0) {
             btnClickAnim(del);
 
             if (operatorId === 0) {
                 firstIn = firstIn.slice(0, -1);
-                bCalcArea.innerHTML = firstIn;
+                bCalcDisp.innerHTML = firstIn;
 
                 if (firstIn.length === 0) {
                     toggleOperators(0);
@@ -182,15 +213,15 @@ function input(e) {
             } else if (operatorId !== 0 && secondIn.length === 0) {
                 optrChg(0);
 
-                tCalcArea.innerHTML = "‎ ";
-                bCalcArea.innerHTML = firstIn;
+                tCalcDisp.innerHTML = "‎ ";
+                bCalcDisp.innerHTML = firstIn;
             } else if (secondIn.length !== 0) {
                 secondIn = secondIn.slice(0, -1);
-                bCalcArea.innerHTML = secondIn;
+                bCalcDisp.innerHTML = secondIn;
 
                 if (secondIn.length === 0) {
-                    tCalcArea.innerHTML = firstIn;
-                    bCalcArea.innerHTML = operator;
+                    tCalcDisp.innerHTML = firstIn;
+                    bCalcDisp.innerHTML = operator;
 
                     toggleOperators(1);
                     toggleBtn(output, 0);
@@ -198,7 +229,7 @@ function input(e) {
             }
         }
     } else if (e === 16) {
-        if (bCalcArea.innerHTML.length !== 0) {
+        if (bCalcDisp.innerHTML.length !== 0) {
             clrCalcDisp();
 
             toggleOperators(0);
@@ -213,7 +244,7 @@ function input(e) {
         if (secondIn.length !== 0) {
             secondIn = rmvUnccsryZrosOnTail(secondIn);
 
-            tCalcArea.innerHTML = firstIn + operator + secondIn + "=";
+            tCalcDisp.innerHTML = firstIn + operator + secondIn + "=";
 
             switch (operatorId) {
                 case 1:
@@ -233,14 +264,14 @@ function input(e) {
             }
 
             if (answer.toString().length > 8) {
-                bCalcArea.innerHTML = answer.toString().slice(0, 8) + "…";
+                bCalcDisp.innerHTML = answer.toString().slice(0, 8) + "…";
             } else {
-                bCalcArea.innerHTML = answer;
+                bCalcDisp.innerHTML = answer;
             }
 
-            bCalcArea.classList.add("scale-animation");
+            bCalcDisp.classList.add("scale-animation");
             sleep(100).then(() => {
-                bCalcArea.classList.remove("scale-animation");
+                bCalcDisp.classList.remove("scale-animation");
             });
 
             toggleBtn(del, 0);
