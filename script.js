@@ -299,7 +299,7 @@ function setMathConstY() {
     calculatorYPosition = calc.getBoundingClientRect().top;
     calculatorHeight = calc.offsetHeight;
 
-    mathConstantsDropdown.style.top = (calculatorYPosition + calculatorHeight + 30) + "px";
+    mathConstantsDropdown.style.top = (calculatorYPosition + calculatorHeight + 25) + "px";
 }
 
 setMathConstY();
