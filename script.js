@@ -4,6 +4,8 @@ let operatorId = 0;
 let operator = "";
 let answer = 0;
 
+const calc = document.getElementById("calculator");
+
 const tCalcDisp = document.getElementById("topCalcDisp");
 const bCalcDisp = document.getElementById("bottomCalcDisp");
 
@@ -78,9 +80,16 @@ function rmvUnccsryZrosOnHead(i) {
 }
 
 function rmvUnccsryZrosAndDecsOnTail(i) {
-    if (i.includes(".")) {
+    if ((i.match(/\./g) || []).length === 1) {
         while (i.slice(-1) === "0" || i.slice(-1) === ".") {
-            i = i.slice(0, -1);
+            if (i === ".") {
+                i = "0";
+                return i;
+            } if (i.length === 1) {
+                return i;
+            } else {
+                i = i.slice(0, -1);
+            }
         }
     }
     return i;
@@ -136,13 +145,6 @@ function toggleOperators(o) {
 toggleOperators(0);
 toggleBtn(del, 0);
 toggleBtn(output, 0);
-
-// document.addEventListener("keydown", (e) => {
-//     if (e.code === "ArrowUp") playerSpriteX += 10
-//     else if (e.code === "ArrowDown") playerSpriteX -= 10
-
-//     document.getElementById('test').innerHTML = 'playerSpriteX = ' + playerSpriteX;
-// });
 
 function input(e) {
     if (e <= 9) {
@@ -270,12 +272,11 @@ function input(e) {
                     answer = "Err";
             }
 
-            if (answer.toString().length > 8) {
-                bCalcDisp.innerHTML = answer.toString().slice(0, 8) + "…";
-            } else {
-                bCalcDisp.innerHTML = answer;
+            if (isNaN(answer)) {
+                answer = "Err";
             }
 
+            bCalcDisp.innerHTML = answer;
             bCalcDisp.classList.add("scale-animation");
             sleep(100).then(() => {
                 bCalcDisp.classList.remove("scale-animation");
@@ -288,3 +289,22 @@ function input(e) {
         }
     }
 }
+
+let calculatorYPosition = calc.getBoundingClientRect().top;
+let calculatorHeight = calc.offsetHeight;
+
+let setMCYResizeTimer;
+
+function setMathConstY() {
+    calculatorYPosition = calc.getBoundingClientRect().top;
+    calculatorHeight = calc.offsetHeight;
+
+    mathConstantsDropdown.style.top = (calculatorYPosition + calculatorHeight + 30) + "px";
+}
+
+setMathConstY();
+
+window.addEventListener("resize", function () {
+    clearTimeout(setMCYResizeTimer);
+    resizeTimer = setTimeout(setMathConstY, 200)
+});

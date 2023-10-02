@@ -33,7 +33,6 @@ a::before {
 }
 
 a:hover::before {
-    /* background-color: #000; */
     transform-origin: right;
     transform: scaleX(0);
 }
@@ -130,13 +129,11 @@ a:hover::before {
     font-size: 20px;
     max-width: 200px;
     position: absolute;
-    top: 100%;
     left: 50%;
-    transform: translate(-50%, 0%);
+    transform: translateX(-50%);
 }
 
 #mathConstantsDropdown summary {
-    background-color: #fff;
     color: #000;
     text-align: center;
     width: 200px;
