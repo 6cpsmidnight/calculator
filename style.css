@@ -161,8 +161,12 @@ a:hover::before {
     top: 10px;
 }
 
-#mathConstantsDropdown li[value="π"] {
+#mathConstantsDropdown li:first-child {
     margin-top: -40px;
+}
+
+#mathConstantsDropdown li:last-child {
+    height: 75px;
 }
 
 @keyframes scale1 {
