@@ -127,6 +127,7 @@ a:hover::before {
     color: #fff;
     font-size: 20px;
     max-width: 200px;
+    padding-bottom: .1px;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
@@ -159,14 +160,11 @@ a:hover::before {
 #mathConstantsDropdown > div {
     position: relative;
     top: 10px;
+    padding-bottom: 25px;
 }
 
 #mathConstantsDropdown li:first-child {
     margin-top: -40px;
-}
-
-#mathConstantsDropdown li:last-child {
-    height: 75px;
 }
 
 @keyframes scale1 {

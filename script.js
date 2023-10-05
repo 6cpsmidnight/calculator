@@ -303,6 +303,7 @@ toggleBtn(outputBtn, 0);
 
 let calculatorYPosition = calcEl.getBoundingClientRect().top;
 let calculatorHeight = calcEl.offsetHeight;
+let mathConstantsDropdownHeight = mathConstantsDropdown.offsetHeight;
 let mathConstsDropdownSummaryHeight = mathConstsDropdownSummary.offsetHeight;
 
 function setMathConstY() {
@@ -353,9 +354,5 @@ document.addEventListener("keydown", function (e) {
                 break;
 
         }
-    }
-    if (e.keyCode === 13) {
-        // The "Enter" key was pressed
-        console.log("You pressed the Enter key.");
     }
 });
