@@ -127,7 +127,7 @@ a:hover::before {
     color: #fff;
     font-size: 20px;
     max-width: 200px;
-    position: absolute;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -154,6 +154,11 @@ a:hover::before {
     text-align: left;
     list-style-type: none;
     margin-bottom: 10px;
+}
+
+#mathConstantsDropdown > div {
+    position: relative;
+    top: 10px;
 }
 
 #mathConstantsDropdown li[value="π"] {
