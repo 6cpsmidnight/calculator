@@ -2,7 +2,7 @@ let firstIn = "";
 let secondIn = "";
 let operatorId = 0;
 let operator = "";
-let answer = 0;
+let answer = "";
 
 const calcEl = document.getElementById("calculator");
 
@@ -26,11 +26,12 @@ const mathConstsDropdownChildDiv = document.querySelector("#mathConstantsDropdow
 
 function calculate(e) {
     if (e <= 9) {
-        if (Number(answer) !== 0) {
+        if (answer.toString().length !== 0 &&
+            operatorId !== 0) {
             if (secondIn.length === 0) {
                 tCalcDisp.textContent = firstIn + operator;
 
-                answer = 0;
+                answer = "";
 
                 toggleOperators(0);
                 toggleBtn(outputBtn, 1);
@@ -43,8 +44,13 @@ function calculate(e) {
             toggleOperators(1);
         } else {
             if (operatorId === 0) {
+                console.log("a")
                 origTxtClr();
-                clrTop();
+
+                if (answer.length !== 0) {
+                    clrTopCalcDisp();
+                    clrData();
+                }
 
                 firstIn = rmvUnccsryZrosOnHead(firstIn);
                 firstIn += e.toString();
@@ -66,11 +72,12 @@ function calculate(e) {
             }
         }
     } else if (e === 10) {
-        if (Number(answer) !== 0) {
+        if (answer.toString().length !== 0 &&
+            operatorId !== 0) {
             if (secondIn.length === 0) {
                 tCalcDisp.textContent = firstIn + operator;
 
-                answer = 0;
+                answer = "";
 
                 toggleOperators(0);
                 toggleBtn(outputBtn, 1);
@@ -84,7 +91,11 @@ function calculate(e) {
         } else {
             if (operatorId === 0) {
                 origTxtClr();
-                clrTop();
+
+                if (answer.length !== 0) {
+                    clrTopCalcDisp();
+                    clrData();
+                }
 
                 firstIn += ".";
                 bCalcDisp.textContent = firstIn;
@@ -110,7 +121,7 @@ function calculate(e) {
         e <= 14) {
         if (firstIn.length !== 0) {
             if (operatorId === 0 &&
-                answer === 0) {
+                answer.toString().length === 0) {
                 firstIn = rmvUnccsryZrosAndDecsOnTail(firstIn);
                 tCalcDisp.textContent = firstIn;
 
@@ -118,7 +129,7 @@ function calculate(e) {
                 bCalcDisp.textContent = operator;
             } else {
                 calc();
-                firstIn = answer.toString();
+                firstIn = answer;
                 tCalcDisp.textContent = firstIn;
 
                 optrChg(e);
@@ -182,10 +193,12 @@ function calculate(e) {
             btnClickAnim(clrBtn);
         }
     } else if (e === 18) {
-        btnClickAnim(outputBtn);
-        if (Number(answer) === 0) {
-            calc();
+        if (tCalcDisp.textContent !== "Made by" &&
+            secondIn.length !== 0) {
+            btnClickAnim(outputBtn);
         }
+
+        calc();
     }
 }
 
@@ -197,6 +210,7 @@ function clrData() {
     firstIn = "";
     secondIn = "";
     optrChg(0);
+    answer = "";
 }
 
 function optrChg(optr) {
@@ -272,10 +286,8 @@ function clrCalcDisp() {
     bCalcDisp.textContent = "‎ ";
 }
 
-function clrTop() {
-    if (firstIn.length === 0) {
-        tCalcDisp.textContent = "‎ ";
-    }
+function clrTopCalcDisp() {
+    tCalcDisp.textContent = "‎ ";
 }
 
 function toggleBtn(btn, o) {
@@ -320,8 +332,7 @@ toggleBtn(outputBtn, 0);
 
 function calc() {
     if (tCalcDisp.textContent !== "Made by" &&
-        secondIn.length !== 0 &&
-        Number(answer) === 0) {
+        secondIn.length !== 0) {
         secondIn = rmvUnccsryZrosAndDecsOnTail(secondIn);
 
         tCalcDisp.textContent = firstIn + operator + secondIn + "=";
@@ -347,7 +358,7 @@ function calc() {
             answer = "Err";
         }
 
-        answer = rmvUnccsryZrosAndDecsOnTail(answer);
+        answer = rmvUnccsryZrosAndDecsOnTail(answer).toString();
         bCalcDisp.textContent = answer;
         bCalcDisp.classList.add("scale-animation");
         sleep(100).then(() => {
