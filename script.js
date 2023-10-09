@@ -82,7 +82,6 @@ function calculate(e) {
 
             toggleOperators(1);
         } else {
-            answer = 0;
             if (operatorId === 0) {
                 origTxtClr();
                 clrTop();
@@ -110,7 +109,8 @@ function calculate(e) {
     } else if (e >= 11 &&
         e <= 14) {
         if (firstIn.length !== 0) {
-            if (secondIn.length === 0) {
+            if (operatorId === 0 &&
+                answer === 0) {
                 firstIn = rmvUnccsryZrosAndDecsOnTail(firstIn);
                 tCalcDisp.textContent = firstIn;
 
