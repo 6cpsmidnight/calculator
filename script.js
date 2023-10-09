@@ -26,67 +26,115 @@ const mathConstsDropdownChildDiv = document.querySelector("#mathConstantsDropdow
 
 function calculate(e) {
     if (e <= 9) {
-        if (operatorId === 0) {
-            origTxtClr();
-            clrOutcome()
-
-            firstIn = rmvUnccsryZrosOnHead(firstIn);
-            firstIn += e.toString();
-            bCalcDisp.innerHTML = firstIn;
-
-            toggleOperators(1);
-            toggleBtn(clrBtn, 1);
-        } else {
+        if (Number(answer) !== 0) {
             if (secondIn.length === 0) {
-                tCalcDisp.innerHTML = firstIn + operator;
+                tCalcDisp.textContent = firstIn + operator;
+
+                answer = 0;
 
                 toggleOperators(0);
                 toggleBtn(outputBtn, 1);
             }
 
+            secondIn = rmvUnccsryZrosOnHead(secondIn);
             secondIn += e.toString();
-            bCalcDisp.innerHTML = secondIn;
-        }
-
-        toggleBtn(delBtn, 1);
-    } else if (e === 10) {
-        if (operatorId === 0) {
-            origTxtClr();
-            clrOutcome()
-
-            firstIn += ".";
-            bCalcDisp.innerHTML = firstIn;
+            bCalcDisp.textContent = secondIn;
 
             toggleOperators(1);
-            toggleBtn(delBtn, 1);
-            toggleBtn(clrBtn, 1);
-
-            btnClickAnim(decimalBtn);
         } else {
+            if (operatorId === 0) {
+                origTxtClr();
+                clrTop();
+
+                firstIn = rmvUnccsryZrosOnHead(firstIn);
+                firstIn += e.toString();
+                bCalcDisp.textContent = firstIn;
+
+                toggleOperators(1);
+                toggleBtn(delBtn, 1);
+                toggleBtn(clrBtn, 1);
+            } else {
+                if (secondIn.length === 0) {
+                    tCalcDisp.textContent = firstIn + operator;
+
+                    toggleBtn(outputBtn, 1);
+                }
+
+                secondIn = rmvUnccsryZrosOnHead(secondIn);
+                secondIn += e.toString();
+                bCalcDisp.textContent = secondIn;
+            }
+        }
+    } else if (e === 10) {
+        if (Number(answer) !== 0) {
             if (secondIn.length === 0) {
-                tCalcDisp.innerHTML += operator;
+                tCalcDisp.textContent = firstIn + operator;
+
+                answer = 0;
 
                 toggleOperators(0);
                 toggleBtn(outputBtn, 1);
             }
 
+            secondIn = rmvUnccsryZrosOnHead(secondIn);
             secondIn += ".";
-            bCalcDisp.innerHTML = secondIn;
-            btnClickAnim(decimalBtn);
-        }
-    } else if (firstIn.length > 0 && secondIn.length === 0 && e >= 11 && e <= 14) {
-        firstIn = rmvUnccsryZrosAndDecsOnTail(firstIn);
-        tCalcDisp.innerHTML = firstIn;
+            bCalcDisp.textContent = secondIn;
 
-        optrChg(e);
-        bCalcDisp.innerHTML = operator;
+            toggleOperators(1);
+        } else {
+            answer = 0;
+            if (operatorId === 0) {
+                origTxtClr();
+                clrTop();
+
+                firstIn += ".";
+                bCalcDisp.textContent = firstIn;
+
+                toggleOperators(1);
+                toggleBtn(clrBtn, 1);
+
+                btnClickAnim(decimalBtn);
+            } else {
+                if (secondIn.length === 0) {
+                    tCalcDisp.textContent += operator;
+
+                    toggleOperators(0);
+                    toggleBtn(outputBtn, 1);
+                }
+
+                secondIn += ".";
+                bCalcDisp.textContent = secondIn;
+                btnClickAnim(decimalBtn);
+            }
+        }
+    } else if (e >= 11 &&
+        e <= 14) {
+        if (firstIn.length !== 0) {
+            if (secondIn.length === 0) {
+                firstIn = rmvUnccsryZrosAndDecsOnTail(firstIn);
+                tCalcDisp.textContent = firstIn;
+
+                optrChg(e);
+                bCalcDisp.textContent = operator;
+            } else {
+                calc();
+                firstIn = answer.toString();
+                tCalcDisp.textContent = firstIn;
+
+                optrChg(e);
+                bCalcDisp.textContent = operator;
+            }
+        }
     } else if (e === 15) {
-        if (tCalcDisp.innerHTML !== "Made by" && bCalcDisp.length !== 0 && firstIn.length !== 0) {
+        if (tCalcDisp.textContent !== "Made by" &&
+            bCalcDisp.length !== 0 &&
+            firstIn.length !== 0 &&
+            tCalcDisp.textContent.slice(-1) !== "=") {
             btnClickAnim(delBtn);
 
             if (operatorId === 0) {
                 firstIn = firstIn.slice(0, -1);
-                bCalcDisp.innerHTML = firstIn;
+                bCalcDisp.textContent = firstIn;
 
                 if (firstIn.length === 0) {
                     toggleOperators(0);
@@ -94,18 +142,19 @@ function calculate(e) {
                     toggleBtn(clrBtn, 0);
                     toggleBtn(outputBtn, 0);
                 }
-            } else if (operatorId !== 0 && secondIn.length === 0) {
+            } else if (operatorId !== 0 &&
+                secondIn.length === 0) {
                 optrChg(0);
 
-                tCalcDisp.innerHTML = "‎ ";
-                bCalcDisp.innerHTML = firstIn;
+                tCalcDisp.textContent = "‎ ";
+                bCalcDisp.textContent = firstIn;
             } else if (secondIn.length !== 0) {
                 secondIn = secondIn.slice(0, -1);
-                bCalcDisp.innerHTML = secondIn;
+                bCalcDisp.textContent = secondIn;
 
                 if (secondIn.length === 0) {
-                    tCalcDisp.innerHTML = firstIn;
-                    bCalcDisp.innerHTML = operator;
+                    tCalcDisp.textContent = firstIn;
+                    bCalcDisp.textContent = operator;
 
                     toggleOperators(1);
                     toggleBtn(outputBtn, 0);
@@ -119,7 +168,8 @@ function calculate(e) {
             block: "start"
         });
     } else if (e === 17) {
-        if (bCalcDisp.innerHTML.length !== 0 && bCalcDisp.innerHTML !== "‎ ") {
+        if (bCalcDisp.textContent.length !== 0 &&
+            bCalcDisp.textContent !== "‎ ") {
             clrCalcDisp();
 
             toggleOperators(0);
@@ -132,43 +182,9 @@ function calculate(e) {
             btnClickAnim(clrBtn);
         }
     } else if (e === 18) {
-        if (secondIn.length !== 0) {
-            secondIn = rmvUnccsryZrosAndDecsOnTail(secondIn);
-
-            tCalcDisp.innerHTML = firstIn + operator + secondIn + "=";
-
-            switch (operatorId) {
-                case 1:
-                    answer = Number(firstIn) + Number(secondIn);
-                    break;
-                case 2:
-                    answer = Number(firstIn) - Number(secondIn);
-                    break;
-                case 3:
-                    answer = Number(firstIn) * Number(secondIn);
-                    break;
-                case 4:
-                    answer = Number(firstIn) / Number(secondIn);
-                    break;
-                default:
-                    answer = "Err";
-            }
-
-            if (isNaN(answer)) {
-                answer = "Err";
-            }
-
-            bCalcDisp.innerHTML = answer;
-            bCalcDisp.classList.add("scale-animation");
-            sleep(100).then(() => {
-                bCalcDisp.classList.remove("scale-animation");
-            });
-            btnClickAnim(outputBtn);
-
-            toggleBtn(delBtn, 0);
-            toggleBtn(outputBtn, 0);
-
-            clrData();
+        btnClickAnim(outputBtn);
+        if (Number(answer) === 0) {
+            calc();
         }
     }
 }
@@ -213,29 +229,30 @@ function optrChg(optr) {
 }
 
 function origTxtClr() {
-    if (tCalcDisp.innerHTML === "Made by") {
+    if (tCalcDisp.textContent === "Made by") {
         clrCalcDisp();
     }
 }
 
 function defNumInDisp(i) {
-    if (bCalcDisp.innerHTML === "0") {
+    if (bCalcDisp.textContent === "0") {
         i = "";
     }
     i += e.toString();
-    bCalcDisp.innerHTML = i;
+    bCalcDisp.textContent = i;
 }
 
 function rmvUnccsryZrosOnHead(i) {
-    if (bCalcDisp.innerHTML === "0") {
+    if (bCalcDisp.textContent === "0") {
         i = "";
     }
     return i;
 }
 
 function rmvUnccsryZrosAndDecsOnTail(i) {
-    if ((i.match(/\./g) || []).length === 1) {
-        while (i.slice(-1) === "0" || i.slice(-1) === ".") {
+    if ((i.toString().match(/\./g) || []).length === 1) {
+        while (i.toString().slice(-1) === "0" ||
+            i.toString().slice(-1) === ".") {
             if (i === ".") {
                 i = "0";
                 return i;
@@ -251,13 +268,13 @@ function rmvUnccsryZrosAndDecsOnTail(i) {
 }
 
 function clrCalcDisp() {
-    tCalcDisp.innerHTML = "‎ ";
-    bCalcDisp.innerHTML = "‎ ";
+    tCalcDisp.textContent = "‎ ";
+    bCalcDisp.textContent = "‎ ";
 }
 
-function clrOutcome() {
+function clrTop() {
     if (firstIn.length === 0) {
-        tCalcDisp.innerHTML = "‎ ";
+        tCalcDisp.textContent = "‎ ";
     }
 }
 
@@ -300,6 +317,49 @@ function toggleOperators(o) {
 toggleOperators(0);
 toggleBtn(delBtn, 0);
 toggleBtn(outputBtn, 0);
+
+function calc() {
+    if (tCalcDisp.textContent !== "Made by" &&
+        secondIn.length !== 0 &&
+        Number(answer) === 0) {
+        secondIn = rmvUnccsryZrosAndDecsOnTail(secondIn);
+
+        tCalcDisp.textContent = firstIn + operator + secondIn + "=";
+
+        switch (operatorId) {
+            case 1:
+                answer = Number(firstIn) + Number(secondIn);
+                break;
+            case 2:
+                answer = Number(firstIn) - Number(secondIn);
+                break;
+            case 3:
+                answer = Number(firstIn) * Number(secondIn);
+                break;
+            case 4:
+                answer = Number(firstIn) / Number(secondIn);
+                break;
+            default:
+                answer = "Err";
+        }
+
+        if (isNaN(answer)) {
+            answer = "Err";
+        }
+
+        answer = rmvUnccsryZrosAndDecsOnTail(answer);
+        bCalcDisp.textContent = answer;
+        bCalcDisp.classList.add("scale-animation");
+        sleep(100).then(() => {
+            bCalcDisp.classList.remove("scale-animation");
+        });
+
+        toggleBtn(outputBtn, 0);
+
+        secondIn = "";
+        optrChg(0);
+    }
+}
 
 let calculatorYPosition = calcEl.getBoundingClientRect().top;
 let calculatorHeight = calcEl.offsetHeight;
