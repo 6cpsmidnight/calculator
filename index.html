@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Better Calculator</title>
-    <meta name="description" content="An ecalculator, but better.">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Better Calculator</title>
+  <meta name="description" content="An ecalculator, but better." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <main>
-        <div id="calculator">
-            <div id="calculation-area">
-                <p id="topCalcDisp">Made by</p>
-                <p id="bottomCalcDisp"><a href="https://eaganfarlin.com/">Eagan</a></p>
-            </div>
-            <div class="btn-rows">
-                <!--
+  <main>
+    <div id="calculator">
+      <div id="calculation-area">
+        <p id="topCalcDisp">Made by</p>
+        <p id="bottomCalcDisp"><a href="https://eaganfarlin.com/">Eagan</a></p>
+      </div>
+      <div class="btn-rows">
+        <!--
                     0-9: 0-9,
                     10: decimal,
                     11-14: operators,
@@ -25,54 +25,83 @@
                     17: clear(clr),
                     18: output(=),
                 -->
-                <div class="btn-row">
-                    <button class="btn-num" onclick="calculate(7)">7</button>
-                    <button class="btn-num" onclick="calculate(8)">8</button>
-                    <button class="btn-num" onclick="calculate(9)">9</button>
-                    <button id="divideBtn" class="btn-optr" onclick="calculate(14)">/</button>
-                </div>
-                <div class="btn-row">
-                    <button class="btn-num" onclick="calculate(4)">4</button>
-                    <button class="btn-num" onclick="calculate(5)">5</button>
-                    <button class="btn-num" onclick="calculate(6)">6</button>
-                    <button id="multiplyBtn" class="btn-optr" onclick="calculate(13)">*</button>
-                </div>
-                <div class="btn-row">
-                    <button class="btn-num" onclick="calculate(1)">1</button>
-                    <button class="btn-num" onclick="calculate(2)">2</button>
-                    <button class="btn-num" onclick="calculate(3)">3</button>
-                    <button id="minusBtn" class="btn-optr" onclick="calculate(12)">-</button>
-                </div>
-                <div class="btn-row">
-                    <button class="btn-num" onclick="calculate(0)">0</button>
-                    <button id="decimalBtn" class="btn-decimal" onclick="calculate(10)">.</button>
-                    <button id="delBtn" class="btn-del" onclick="calculate(15)">×</button>
-                    <button id="plusBtn" class="btn-optr" onclick="calculate(11)">+</button>
-                </div>
-                <div class="btn-row btn-bottom-output">
-                    <button id="mathConstBtn" class="btn-clr" onclick="calculate(16)">…</button>
-                    <button id="clrBtn" class="btn-clr" onclick="calculate(17)">Clr</button>
-                    <button id="outputBtn" class="btn-big btn-output" onclick="calculate(18)">=</button>
-                </div>
-            </div>
+        <div class="btn-row">
+          <button class="btn-num" onclick="calculate(7)">7</button>
+          <button class="btn-num" onclick="calculate(8)">8</button>
+          <button class="btn-num" onclick="calculate(9)">9</button>
+          <button id="divideBtn" class="btn-optr" onclick="calculate(14)">
+            /
+          </button>
         </div>
-    
-        <details id="mathConstantsDropdown">
-            <summary>Math Constants</summary>
-            <div>
-                <ul>
-                    <li value="π">π (Pi) - Approximately 3.14159265359</li>
-                    <li value="e">e (Euler's number) - Approximately 2.71828182845</li>
-                    <li value="√2">√2 (Square Root of 2) - Approximately 1.41421356237</li>
-                    <li value="√3">√3 (Square Root of 3) - Approximately 1.73205080757</li>
-                    <li value="√5">√5 (Square Root of 5) - Approximately 2.23606797750</li>
-                    <li value="√7">√7 (Square Root of 7) - Approximately 2.64575131106</li>
-                    <li value="φ">φ (Phi, the Golden Ratio) - Approximately 1.61803398875</li>
-                </ul>
-            </div>
-        </details>
-    </main>
-    <script src="script.js"></script>
-</body>
+        <div class="btn-row">
+          <button class="btn-num" onclick="calculate(4)">4</button>
+          <button class="btn-num" onclick="calculate(5)">5</button>
+          <button class="btn-num" onclick="calculate(6)">6</button>
+          <button id="multiplyBtn" class="btn-optr" onclick="calculate(13)">
+            *
+          </button>
+        </div>
+        <div class="btn-row">
+          <button class="btn-num" onclick="calculate(1)">1</button>
+          <button class="btn-num" onclick="calculate(2)">2</button>
+          <button class="btn-num" onclick="calculate(3)">3</button>
+          <button id="minusBtn" class="btn-optr" onclick="calculate(12)">
+            -
+          </button>
+        </div>
+        <div class="btn-row">
+          <button class="btn-num" onclick="calculate(0)">0</button>
+          <button id="decimalBtn" class="btn-decimal" onclick="calculate(10)">
+            .
+          </button>
+          <button id="delBtn" class="btn-del" onclick="calculate(15)">×</button>
+          <button id="plusBtn" class="btn-optr" onclick="calculate(11)">
+            +
+          </button>
+        </div>
+        <div class="btn-row btn-bottom-output">
+          <button id="mathConstBtn" class="btn-clr" onclick="calculate(16)">
+            …
+          </button>
+          <button id="clrBtn" class="btn-clr" onclick="calculate(17)">
+            Clr
+          </button>
+          <button
+            id="outputBtn"
+            class="btn-big btn-output"
+            onclick="calculate(18)"
+          >
+            =
+          </button>
+        </div>
+      </div>
+    </div>
 
+    <details id="mathConstantsDropdown">
+      <summary>Math Constants</summary>
+      <div>
+        <ul>
+          <li value="π">π (Pi) - Approximately 3.14159265359</li>
+          <li value="e">e (Euler's number) - Approximately 2.71828182845</li>
+          <li value="√2">
+            √2 (Square Root of 2) - Approximately 1.41421356237
+          </li>
+          <li value="√3">
+            √3 (Square Root of 3) - Approximately 1.73205080757
+          </li>
+          <li value="√5">
+            √5 (Square Root of 5) - Approximately 2.23606797750
+          </li>
+          <li value="√7">
+            √7 (Square Root of 7) - Approximately 2.64575131106
+          </li>
+          <li value="φ">
+            φ (Phi, the Golden Ratio) - Approximately 1.61803398875
+          </li>
+        </ul>
+      </div>
+    </details>
+  </main>
+  <script src="script.js"></script>
+</body>
 </html>
